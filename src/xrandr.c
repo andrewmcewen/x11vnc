@@ -304,7 +304,6 @@ int known_xrandr_mode(char *s) {
 	}
 }
 
-#if HAVE_SETDESKTOPSIZE
 /* Set framebuffer size to w x h
  * Does not alter physical resolution but scales desired framebuffer to physical display resolution */
 rfbBool xrandr_set_scale_from(int w, int h)
@@ -453,4 +452,3 @@ void xrandr_reset_scaling()
 {
     xrandr_set_scale_from(-1, -1);
 }
-#endif

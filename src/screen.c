@@ -93,9 +93,7 @@ rfbBool vnc_reflect_send_cuttext(char *str, int len);
 static void debug_colormap(XImage *fb);
 static void set_visual(char *str);
 static void nofb_hook(rfbClientPtr cl);
-#if HAVE_SETDESKTOPSIZE
 static int set_desktop_size_hook(int width, int height, int numScreens, rfbExtDesktopScreen* extDesktopScreens, rfbClientPtr cl);
-#endif
 static void remove_fake_fb(void);
 static void install_fake_fb(int w, int h, int bpp);
 static void initialize_snap_fb(void);
@@ -822,7 +820,6 @@ void free_old_fb(void) {
 	}
 }
 
-#if HAVE_SETDESKTOPSIZE
 static int set_desktop_size_hook(int width, int height, int numScreens, rfbExtDesktopScreen* extDesktopScreens, rfbClientPtr cl)
 {
     int i;
@@ -839,7 +836,6 @@ static int set_desktop_size_hook(int width, int height, int numScreens, rfbExtDe
 
     return xrandr_set_scale_from(width, height) ? rfbExtDesktopSize_Success : rfbExtDesktopSize_InvalidScreenLayout;
 }
-#endif
 
 
 static char _lcs_tmp[128];
@@ -3675,11 +3671,9 @@ void initialize_screen(int *argc, char **argv, XImage *fb) {
 	screen->setXCutText = xcut_receive;
 	screen->setTranslateFunction = set_xlate_wrapper;
 
-	#if HAVE_SETDESKTOPSIZE
-    	if (enable_setdesktopsize) {
-    		screen->setDesktopSizeHook = set_desktop_size_hook;
-    	}
-    #endif
+    if (enable_setdesktopsize) {
+    	screen->setDesktopSizeHook = set_desktop_size_hook;
+    }
 
 	screen->kbdReleaseAllKeys = kbd_release_all_keys; 
 	screen->setSingleWindow = set_single_window; 
