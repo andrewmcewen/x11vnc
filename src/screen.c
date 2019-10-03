@@ -3670,11 +3670,7 @@ void initialize_screen(int *argc, char **argv, XImage *fb) {
 	screen->ptrAddEvent = pointer_event;
 	screen->setXCutText = xcut_receive;
 	screen->setTranslateFunction = set_xlate_wrapper;
-
-    if (enable_setdesktopsize) {
-    	screen->setDesktopSizeHook = set_desktop_size_hook;
-    }
-
+    screen->setDesktopSizeHook = set_desktop_size_hook;
 	screen->kbdReleaseAllKeys = kbd_release_all_keys; 
 	screen->setSingleWindow = set_single_window; 
 	screen->setServerInput = set_server_input; 
