@@ -280,6 +280,7 @@ elif test "$X_CFLAGS" != "-DX_DISPLAY_MISSING"; then
 			"SunOS 5"*) X_EXTRA_LIBS="$X_EXTRA_LIBS -R/usr/sfw/lib" ;;
 			esac
 		fi
+
 		if test ! -z "$HAVE_LIBXRANDR"; then
 			# also need /usr/X11/include for Solaris 10 10/08 and later
 			case `(uname -sr) 2>/dev/null` in
